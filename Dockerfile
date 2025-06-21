@@ -10,7 +10,7 @@ RUN dotnet restore ./Currex/Currex.csproj
 COPY Currex/ ./Currex/
 
 # Publish yap
-RUN dotnet publish ./Currex.csproj -c Release -o /app/out
+RUN dotnet publish ./Currex/Currex.csproj -c Release -o /app/out
 
 # Runtime aþamasý
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
