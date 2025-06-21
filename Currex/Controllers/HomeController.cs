@@ -20,8 +20,8 @@ namespace Currex.Controllers
 
         public IActionResult Index()
         {
-            FinancialMarketRateModel a = _financialMarketRateManager.GetCurrentAsync().Result;
-            return View();
+            FinancialMarketRateModel marketRateModel = _financialMarketRateManager.GetCurrentAsync().Result;
+            return View(marketRateModel);
         }
 
         public IActionResult Privacy()

@@ -20,9 +20,14 @@
 
     public static class FinancialAssetTypeExtensions
     {
-        public static string ToDisplayName(this FinancialAssetType status)
+        public static string Code(this FinancialAssetType assetType)
         {
-            return status switch
+            return assetType.ToString();
+        }
+
+        public static string ToDisplayName(this FinancialAssetType assetType)
+        {
+            return assetType switch
             {
                 FinancialAssetType.USD => "ABD DOLARI",
                 FinancialAssetType.EUR => "EURO",
@@ -38,8 +43,20 @@
                 FinancialAssetType.XAUFULL => "TAM ALTIN",
                 FinancialAssetType.XAURESAT => "REŞAT ALTIN",
                 FinancialAssetType.XAUTRABZONHASIR => "TRABZON HASIR",
-                _ => status.ToString()
+                _ => assetType.ToString()
             };
+        }
+
+        public static bool IsGold(this FinancialAssetType assetType)
+        {
+            return assetType == FinancialAssetType.XAU ||
+                   assetType == FinancialAssetType.XAU24 ||
+                   assetType == FinancialAssetType.XAU22 ||
+                   assetType == FinancialAssetType.XAUQUARTER ||
+                   assetType == FinancialAssetType.XAUHALF ||
+                   assetType == FinancialAssetType.XAUFULL ||
+                   assetType == FinancialAssetType.XAURESAT ||
+                   assetType == FinancialAssetType.XAUTRABZONHASIR;
         }
     }
 }

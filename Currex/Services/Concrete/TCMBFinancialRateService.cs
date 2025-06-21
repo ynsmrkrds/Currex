@@ -24,8 +24,7 @@ namespace Currex.Services.Concrete
                     .. hourlyDataModel.ExchangeRateList.Rates
                         .Where(r => Enum.GetValues<FinancialAssetType>().ToList().Any(t => t.ToString() == r.Currency))
                         .Select(r => new FinancialAssetModel(
-                                name: Enum.TryParse(r.Currency, out FinancialAssetType assetType) ? assetType.ToDisplayName() : r.Currency,
-                                code: r.Currency,
+                                assetType: Enum.Parse<FinancialAssetType>(r.Currency),
                                 buying: DecimalHelper.TryParseFlexible(r.BuyPrice, out decimal b) ? b : 0,
                                 paying: DecimalHelper.TryParseFlexible(r.BuyPrice, out decimal p) ? p : 0,
                                 selling: DecimalHelper.TryParseFlexible(r.BuyPrice, out decimal s) ? s : 0
@@ -34,8 +33,7 @@ namespace Currex.Services.Concrete
                     .. dailyDataModel.Currencies
                         .Where(c => Enum.GetValues<FinancialAssetType>().ToList().Any(t => t.ToString() == c.Code))
                         .Select(c => new FinancialAssetModel(
-                            name: Enum.TryParse(c.Code, out FinancialAssetType assetType) ? assetType.ToDisplayName() : c.LocalName,
-                            code: c.Code,
+                            assetType: Enum.Parse<FinancialAssetType>(c.Code),
                             buying: (c.ForexBuying ?? c.BanknoteBuying) ?? 0,
                             paying: (c.ForexBuying ?? c.BanknoteBuying) ?? 0,
                             selling: (c.ForexSelling ?? c.BanknoteSelling) ?? 0
@@ -47,8 +45,7 @@ namespace Currex.Services.Concrete
                             var XAU = hourlyDataModel.ExchangeRateList.Rates.FirstOrDefault(r => r.Currency == FinancialAssetType.XAU.ToString());
 
                             return new FinancialAssetModel(
-                                name: t.ToDisplayName(),
-                                code: t.ToString(),
+                                assetType: t,
                                 buying: DecimalHelper.TryParseFlexible(XAU?.BuyPrice, out decimal b) ? b : 0,
                                 paying: DecimalHelper.TryParseFlexible(XAU?.BuyPrice, out decimal p) ? p : 0,
                                 selling: DecimalHelper.TryParseFlexible(XAU?.BuyPrice, out decimal s) ? s : 0
@@ -126,7 +123,7 @@ namespace Currex.Services.Concrete
             }
         }
 
-        public async Task<TCMBFinancialRateDailyDataModel> GetDaily()
+        private async Task<TCMBFinancialRateDailyDataModel> GetDaily()
         {
             var response = await httpClient.GetAsync(options.Value.ServiceUrls.TCMBFinancialRateDaily);
             response.EnsureSuccessStatusCode();

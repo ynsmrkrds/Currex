@@ -8,43 +8,70 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Currex.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Currex</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <header class="bg-white shadow-sm py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-center px-4">
+            <img src="~/images/logo.svg" alt="Logo" class="w-16 h-16 rounded-full border border-gray-200 shadow-md">
+            <div class="ml-4">
+                <span class="text-2xl font-semibold text-primary tracking-wide block">Uzungöl Kuyumculuk</span>
+                <span class="text-sm text-gray-500">İnşaat Ticaret Limited Şirketi</span>
             </div>
-        </nav>
+        </div>
     </header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Currex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="bg-white mt-16 p-6 shadow-inner">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+
+            <!-- İletişim Bilgileri -->
+            <div>
+                <h3 class="text-xl font-semibold mb-3 text-primary">📞 İletişim Bilgileri</h3>
+                <div class="ml-2">
+                    <p class="text-gray-600 flex items-center gap-2">
+                        <i class="fa-duotone fa-solid fa-map-pin"></i>
+                        Uzungöl Mah. Fatih Cad. No: 63/B Çaykara/TRABZON
+                    </p>
+                    <p class="text-gray-600 flex items-center gap-2" style="font-size: 14px;">
+                        <i class="fa-duotone fa-solid fa-phone"></i>
+                        +90 546 814 7467
+                    </p>
+                    <p class="text-gray-600 flex items-center gap-2">
+                        <i class="fab fa-instagram"></i>
+                        <a href="https://www.instagram.com/uzungolkuyumculuk" target="_blank" rel="noopener noreferrer">uzungolkuyumculuk</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Harita -->
+            <div>
+                <h3 class="text-xl font-semibold mb-3 text-primary">📍 Konum</h3>
+                <iframe class="w-full h-48 rounded-lg border"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4537.64467089403!2d40.299756348746754!3d40.61853382119939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40659461849259db%3A0x8e7581f152a6afcc!2sUzung%C3%B6l%20Jewelry!5e0!3m2!1str!2str!4v1750532256684!5m2!1str!2str"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
+        <p class="text-center text-sm text-secondary mt-6">
+            &copy; <span id="currentYear"></span> Uzungöl Kuyumculuk. Tüm hakları saklıdır.
+        </p>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

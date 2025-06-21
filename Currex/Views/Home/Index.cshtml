@@ -1,8 +1,63 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Currex.Enums.FinancialMarketRate
+@using Currex.Models.FinancialMarketRate
+
+@model FinancialMarketRateModel
+
+@{
+    ViewData["Title"] = "Uzungöl Kuyumculuk";
+
+    var currencyAssets = Model.Assets.Where(a => a.AssetType.IsGold() == false).ToList();
+    var goldAssets = Model.Assets.Where(a => a.AssetType.IsGold()).ToList();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- İçerik Alanı -->
+<main class="max-w-7xl mx-auto mt-8 px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Döviz Kurları -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-xl font-bold mb-4 text-primary">Döviz Kurları</h2>
+            <div class="grid grid-cols-4 text-gray-500 font-semibold mb-2 px-2">
+                <span class="col-span-2"></span>
+                <span class="text-center text-secondary">ALIŞ</span>
+                <span class="text-center text-secondary">PAY</span>
+            </div>
+            <div class="space-y-3">
+                @foreach (var asset in currencyAssets)
+                {
+                    <div class="grid grid-cols-4 items-center px-2 space-y-2">
+                        <div class="flex items-center space-x-2 col-span-2">
+                            <img src="~/images/@(asset.AssetType.Code().ToLower()).png" alt="@asset.AssetType.ToDisplayName()" class="w-6 h-6 rounded-full object-cover" />
+                            <span class="font-medium">@asset.AssetType.ToDisplayName()</span>
+                        </div>
+                        <span class="text-center">₺@asset.Buying.ToString("N2")</span>
+                        <span class="text-center">₺@asset.Paying.ToString("N2")</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Altın Kurları Kartı -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-xl font-bold mb-4 text-primary">Altın Kurları</h2>
+            <div class="grid grid-cols-4 text-gray-500 font-semibold mb-2 px-2">
+                <span class="col-span-2"></span>
+                <span class="text-center text-secondary">ALIŞ</span>
+                <span class="text-center text-secondary">SATIŞ</span>
+            </div>
+            <div class="space-y-3">
+                @foreach (var asset in goldAssets)
+                {
+                    <div class="grid grid-cols-4 items-center px-2 space-y-1">
+                        <div class="flex items-center space-x-2 col-span-2">
+                            <img src="~/images/gold.png" alt="@asset.AssetType.ToDisplayName()" class="w-6 h-6 rounded-full object-cover" />
+                            <span class="font-medium">@asset.AssetType.ToDisplayName()</span>
+                        </div>
+                        <span class="text-center">₺@asset.Buying.ToString("N2")</span>
+                        <span class="text-center">₺@asset.Selling.ToString("N2")</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>
