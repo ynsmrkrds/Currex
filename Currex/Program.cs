@@ -1,7 +1,18 @@
+using Currex.Managers;
+using Currex.Models;
+using System.Globalization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Configure appSettings.json
+builder.Services.Configure<ApplicationSettingsModel>(builder.Configuration.GetSection("ApplicationSettings"));
+
+// Add services
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<FinancialMarketRateManager>();
 
 var app = builder.Build();
 
