@@ -1,10 +1,10 @@
-﻿namespace Currex.Models.FinancialMarketRate
-{
-    public class FinancialAssetModel(string name, string code, decimal buying, decimal paying, decimal selling)
-    {
-        public string Name { get; set; } = name;
+﻿using Currex.Enums.FinancialMarketRate;
 
-        public string Code { get; set; } = code;
+namespace Currex.Models.FinancialMarketRate
+{
+    public class FinancialAssetModel(FinancialAssetType assetType, decimal buying, decimal paying, decimal selling)
+    {
+        public FinancialAssetType AssetType { get; set; } = assetType;
 
         public decimal Buying { get; set; } = buying;
 
@@ -16,7 +16,7 @@
         {
             if (obj is FinancialAssetModel other)
             {
-                return string.Equals(Code, other.Code, StringComparison.OrdinalIgnoreCase);
+                return string.Equals(AssetType.Code(), other.AssetType.Code(), StringComparison.OrdinalIgnoreCase);
             }
 
             return false;
@@ -24,7 +24,7 @@
 
         public override int GetHashCode()
         {
-            return Code?.ToLowerInvariant().GetHashCode() ?? 0;
+            return AssetType.Code()?.ToLowerInvariant().GetHashCode() ?? 0;
         }
     }
 }

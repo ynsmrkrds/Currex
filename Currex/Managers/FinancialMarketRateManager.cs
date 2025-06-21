@@ -18,7 +18,7 @@ namespace Currex.Managers
 
             ApplyMargins(financialMarketRate);
 
-            financialMarketRate.Assets.RemoveWhere(x => x.Code == FinancialAssetType.XAU.ToString() || x.Buying == 0);
+            financialMarketRate.Assets.RemoveWhere(x => x.AssetType.Code() == FinancialAssetType.XAU.ToString() || x.Buying == 0);
 
             return financialMarketRate;
         }
@@ -29,7 +29,7 @@ namespace Currex.Managers
 
             foreach (var asset in financialMarketRate.Assets)
             {
-                PropertyInfo? marginProperty = marginProperties.FirstOrDefault(p => string.Equals(p.Name, asset.Code, StringComparison.OrdinalIgnoreCase));
+                PropertyInfo? marginProperty = marginProperties.FirstOrDefault(p => string.Equals(p.Name, asset.AssetType.Code(), StringComparison.OrdinalIgnoreCase));
                 if (marginProperty == null) continue;
 
                 var buyingMargin = marginProperty.GetValue(options.Value.FinancialAssetMargins.Buying) as double?;
