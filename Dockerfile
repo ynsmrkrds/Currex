@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
 # Proje dosyalarýný kopyala
-COPY Currex/Currex/*.csproj ./Currex/
+COPY Currex/Currex/Currex.csproj ./Currex/
 RUN dotnet restore ./Currex/Currex.csproj
 
 # Tüm dosyalarý kopyala
