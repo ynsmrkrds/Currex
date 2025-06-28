@@ -25,30 +25,36 @@
 
     public class MarginGroup
     {
-        public double? USD { get; set; }
+        public MarginValue? USD { get; set; }
 
-        public double? EUR { get; set; }
+        public MarginValue? EUR { get; set; }
 
-        public double? SAR { get; set; }
+        public MarginValue? SAR { get; set; }
 
-        public double? KWD { get; set; }
+        public MarginValue? KWD { get; set; }
 
-        public double? AED { get; set; }
+        public MarginValue? AED { get; set; }
 
-        public double? GBP { get; set; }
+        public MarginValue? GBP { get; set; }
 
-        public double? XAU24 { get; set; }
+        public MarginValue? XAU24 { get; set; }
 
-        public double? XAU22 { get; set; }
+        public MarginValue? XAU22 { get; set; }
 
-        public double? XAUQUARTER { get; set; }
+        public MarginValue? XAUQUARTER { get; set; }
 
-        public double? XAUHALF { get; set; }
+        public MarginValue? XAUHALF { get; set; }
 
-        public double? XAUFULL { get; set; }
+        public MarginValue? XAUFULL { get; set; }
 
-        public double? XAURESAT { get; set; }
+        public MarginValue? XAURESAT { get; set; }
 
-        public double? XAUTRABZONHASIR { get; set; }
+        public MarginValue? XAUTRABZONHASIR { get; set; }
+    }
+
+    public class MarginValue
+    {
+        public bool IsPositive { get; set; }
+        public double Value { get; set; }
     }
 }

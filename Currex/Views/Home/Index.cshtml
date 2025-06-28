@@ -28,7 +28,13 @@
                     <div class="grid grid-cols-4 items-center px-2 space-y-2">
                         <div class="flex items-center space-x-2 col-span-2">
                             <img src="~/images/@(asset.AssetType.Code().ToLower()).png" alt="@asset.AssetType.ToDisplayName()" class="w-6 h-6 rounded-full object-cover" />
-                            <span class="font-medium">@asset.AssetType.ToDisplayName()</span>
+                            <span class="font-medium">
+                                @asset.AssetType.ToString()
+                                @if (!asset.AssetType.IsGold())
+                                {
+                                    <span class="text-gray-400">(@asset.AssetType.ToDisplayName())</span>
+                                }
+                            </span>
                         </div>
                         <span class="text-center">₺@asset.Buying.ToString("N2")</span>
                         <span class="text-center">₺@asset.Paying.ToString("N2")</span>
@@ -61,3 +67,19 @@
         </div>
     </div>
 </main>
+
+@if (ViewBag.RefreshTime != null)
+{
+    var refreshTime = (DateTime)ViewBag.RefreshTime;
+    <script>
+        const refreshAt = new Date('@refreshTime.ToString("yyyy-MM-ddTHH:mm:ss")');
+        const now = new Date();
+
+        const msUntilRefresh = refreshAt - now;
+        if (msUntilRefresh > 0) {
+            setTimeout(function () {
+                location.reload();
+            }, msUntilRefresh);
+        }
+    </script>
+}
