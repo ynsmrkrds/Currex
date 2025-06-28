@@ -32,14 +32,33 @@ namespace Currex.Managers
                 PropertyInfo? marginProperty = marginProperties.FirstOrDefault(p => string.Equals(p.Name, asset.AssetType.Code(), StringComparison.OrdinalIgnoreCase));
                 if (marginProperty == null) continue;
 
-                var buyingMargin = marginProperty.GetValue(options.Value.FinancialAssetMargins.Buying) as double?;
-                var payingMargin = marginProperty.GetValue(options.Value.FinancialAssetMargins.Paying) as double?;
-                var sellingMargin = marginProperty.GetValue(options.Value.FinancialAssetMargins.Selling) as double?;
+                var buyingMargin = (MarginValue?)marginProperty.GetValue(options.Value.FinancialAssetMargins.Buying);
+                var payingMargin = (MarginValue?)marginProperty.GetValue(options.Value.FinancialAssetMargins.Paying);
+                var sellingMargin = (MarginValue?)marginProperty.GetValue(options.Value.FinancialAssetMargins.Selling);
 
-                asset.Buying *= buyingMargin.HasValue ? (decimal)(1 + buyingMargin.Value / 100.0) : 1;
-                asset.Paying *= payingMargin.HasValue ? (decimal)(1 + payingMargin.Value / 100.0) : 0;
-                asset.Selling *= sellingMargin.HasValue ? (decimal)(1 + sellingMargin.Value / 100.0) : 0;
+                asset.Buying *= buyingMargin is not null
+                    ? (decimal)(1 + (buyingMargin.IsPositive ? 1 : -1) * buyingMargin.Value / 100.0)
+                    : 1;
+                asset.Paying *= payingMargin is not null
+                    ? (decimal)(1 + (payingMargin.IsPositive ? 1 : -1) * payingMargin.Value / 100.0)
+                    : 0;
+                asset.Selling *= sellingMargin is not null
+                    ? (decimal)(1 + (sellingMargin.IsPositive ? 1 : -1) * sellingMargin.Value / 100.0)
+                    : 0;
+
+                // If asset is gold, round values to nearest multiple of 5 with no decimals
+                if (asset.AssetType.IsGold())
+                {
+                    asset.Buying = RoundUpToNearestFive(asset.Buying);
+                    asset.Paying = RoundUpToNearestFive(asset.Paying);
+                    asset.Selling = RoundUpToNearestFive(asset.Selling);
+                }
             }
+        }
+
+        private static decimal RoundUpToNearestFive(decimal value)
+        {
+            return Math.Ceiling(value / 5) * 5;
         }
     }
 }

@@ -13,14 +13,38 @@
 </head>
 <body>
     <header class="bg-white shadow-sm py-4">
-        <div class="max-w-6xl mx-auto flex items-center justify-center px-4">
-            <img src="~/images/logo.svg" alt="Logo" class="w-16 h-16 rounded-full border border-gray-200 shadow-md">
-            <div class="ml-4">
-                <span class="text-2xl font-semibold text-primary tracking-wide block">Uzungöl Kuyumculuk</span>
-                <span class="text-sm text-gray-500">İnşaat Ticaret Limited Şirketi</span>
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 items-center gap-4 md:gap-0">
+                <!-- Sol boşluk (sadece masaüstü) -->
+                <div class="hidden md:block"></div>
+
+                <!-- Logo ve başlık -->
+                <div class="flex justify-center">
+                    <div class="flex items-center md:flex-row flex-col text-center">
+                        <img src="~/images/logo.svg" alt="Logo" class="w-20 h-20 rounded-full border border-gray-200 shadow-md">
+                        <div class="ml-4 md:ml-4 mt-2 md:mt-0 text-left">
+                            <span class="text-2xl font-semibold text-primary tracking-wide block">Uzungöl Kuyumculuk</span>
+                            <span class="text-sm text-gray-500 block text-justify">İnşaat Ticaret Limited Şirketi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saat kutucukları -->
+                <div class="flex flex-col gap-2 mt-2 md:mt-0 items-center md:items-end">
+                    <span class="inline-flex items-center bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full shadow-sm">
+                        <i class="fa-regular fa-clock mr-2"></i>
+                        <span id="currentDateTime" class="inline-block w-[110px] text-center md:text-right">--:--</span>
+                    </span>
+                    <span class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full shadow-sm">
+                        <i class="fa-solid fa-rotate-right mr-2"></i>
+                        <span id="refreshDateTime" class="inline-block w-[110px] text-center md:text-right">--:--</span>
+                    </span>
+                </div>
             </div>
         </div>
     </header>
+
+
 
 
     <div class="container">
@@ -42,7 +66,7 @@
                     </p>
                     <p class="text-gray-600 flex items-center gap-2" style="font-size: 14px;">
                         <i class="fa-duotone fa-solid fa-phone"></i>
-                        +90 546 814 7467
+                        +90 536 814 7467
                     </p>
                     <p class="text-gray-600 flex items-center gap-2">
                         <i class="fab fa-instagram"></i>
@@ -71,6 +95,23 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+        // Güncel tarih ve saat
+        function updateCurrentDateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById("currentDateTime").textContent = now.toLocaleString('tr-TR', options);
+        }
+        // Sayfa yenilenme tarih ve saatini ayarla
+        function setRefreshDateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById("refreshDateTime").textContent = now.toLocaleString('tr-TR', options);
+        }
+        updateCurrentDateTime();
+        setRefreshDateTime();
+        setInterval(updateCurrentDateTime, 1000); // Her saniye güncelle
         document.getElementById("currentYear").textContent = new Date().getFullYear();
     </script>
 </body>
