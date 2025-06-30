@@ -53,6 +53,13 @@ namespace Currex.Managers
                     asset.Paying = RoundUpToNearestFive(asset.Paying);
                     asset.Selling = RoundUpToNearestFive(asset.Selling);
                 }
+                else
+                {
+                    // For non-gold assets, round down to the nearest 0.10 (e.g., 109.87 -> 109.80)
+                    asset.Buying = Math.Floor(asset.Buying * 10) / 10;
+                    asset.Paying = Math.Floor(asset.Paying * 10) / 10;
+                    asset.Selling = Math.Floor(asset.Selling * 10) / 10;
+                }
             }
         }
 
