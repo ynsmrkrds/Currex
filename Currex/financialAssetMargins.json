@@ -1,0 +1,223 @@
+[
+  {
+    "AssetType": 1,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 3.5
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 1.5
+      },
+      "Selling": {
+        "IsPositive": false,
+        "Value": 0.0
+      }
+    }
+  },
+  {
+    "AssetType": 2,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 3.5
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 1.5
+      },
+      "Selling": {
+        "IsPositive": false,
+        "Value": 0.0
+      }
+    }
+  },
+  {
+    "AssetType": 3,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 10.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 5.0
+      },
+      "Selling": {
+        "IsPositive": false,
+        "Value": 0.0
+      }
+    }
+  },
+  {
+    "AssetType": 4,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 20.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 15.0
+      },
+      "Selling": {
+        "IsPositive": false,
+        "Value": 0.0
+      }
+    }
+  },
+  {
+    "AssetType": 5,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 10.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 5.0
+      },
+      "Selling": {
+        "IsPositive": false,
+        "Value": 0.0
+      }
+    }
+  },
+  {
+    "AssetType": 6,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 4.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 2.0
+      },
+      "Selling": {
+        "IsPositive": false,
+        "Value": 0.0
+      }
+    }
+  },
+  {
+    "AssetType": 7,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 2.5
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 0.0
+      },
+      "Selling": {
+        "IsPositive": true,
+        "Value": 7.0
+      }
+    }
+  },
+  {
+    "AssetType": 8,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 10.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 0.0
+      },
+      "Selling": {
+        "IsPositive": false,
+        "Value": 1.0
+      }
+    }
+  },
+  {
+    "AssetType": 9,
+    "Values": {
+      "Buying": {
+        "IsPositive": true,
+        "Value": 63.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 0.0
+      },
+      "Selling": {
+        "IsPositive": true,
+        "Value": 79.0
+      }
+    }
+  },
+  {
+    "AssetType": 10,
+    "Values": {
+      "Buying": {
+        "IsPositive": true,
+        "Value": 226.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 0.0
+      },
+      "Selling": {
+        "IsPositive": true,
+        "Value": 258.0
+      }
+    }
+  },
+  {
+    "AssetType": 11,
+    "Values": {
+      "Buying": {
+        "IsPositive": true,
+        "Value": 552.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 0.0
+      },
+      "Selling": {
+        "IsPositive": true,
+        "Value": 616.0
+      }
+    }
+  },
+  {
+    "AssetType": 12,
+    "Values": {
+      "Buying": {
+        "IsPositive": true,
+        "Value": 660.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 0.0
+      },
+      "Selling": {
+        "IsPositive": true,
+        "Value": 720.0
+      }
+    }
+  },
+  {
+    "AssetType": 13,
+    "Values": {
+      "Buying": {
+        "IsPositive": false,
+        "Value": 10.0
+      },
+      "Paying": {
+        "IsPositive": false,
+        "Value": 0.0
+      },
+      "Selling": {
+        "IsPositive": true,
+        "Value": 20.0
+      }
+    }
+  }
+]

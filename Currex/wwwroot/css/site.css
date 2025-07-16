@@ -37,3 +37,9 @@ body {
 .text-secondary {
     color: #5e7b6d !important
 }
+
+.background-secondary {
+    background-color: #5e7b6d !important;
+    color: #fff !important;
+    font-weight: bold;
+}

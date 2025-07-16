@@ -1,5 +1,7 @@
 using Currex.Managers;
 using Currex.Models;
+using Currex.Services.Abstract;
+using Currex.Services.Concrete;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,7 @@ builder.Services.Configure<ApplicationSettingsModel>(builder.Configuration.GetSe
 // Add services
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<FinancialMarketRateManager>();
+builder.Services.AddSingleton<IFinancialAssetMarginService, FinancialAssetMarginService>();
 
 var app = builder.Build();
 

@@ -1,0 +1,68 @@
+﻿@model List<Currex.Models.Admin.FinancialAssetMarginModel>
+@using Currex.Enums.FinancialMarketRate
+
+<form method="post" asp-action="UpdateMargins">
+    <div class="container py-4">
+        <div class="row g-4">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header background-secondary fw-bold">
+                            @(Model[i].AssetType.IsGold() ? Model[i].AssetType.ToDisplayName() : Model[i].AssetType.ToString())
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                @foreach (var field in new[] { "Alış", "Pay", "Satış" })
+                                {
+                                    var valueModel = field switch
+                                    {
+                                        "Alış" => Model[i].Values.Buying,
+                                        "Pay" => Model[i].Values.Paying,
+                                        "Satış" => Model[i].Values.Selling,
+                                        _ => null
+                                    };
+                                    <div class="col-12">
+                                        <div class="mb-2 fw-semibold text-primary">@field</div>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input"
+                                                       type="radio"
+                                                       name="Model[@i].Values.@(field).IsPositive"
+                                                       value="false"
+                                                       id="@(field)_alt_@i"
+                                                       @(valueModel!.IsPositive ? "" : "checked") />
+                                                <label class="form-check-label text-primary" for="@(field)_alt_@i">Alt</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input text-primary"
+                                                       type="radio"
+                                                       name="Model[@i].Values.@(field).IsPositive"
+                                                       value="true"
+                                                       id="@(field)_ust_@i"
+                                                       @(valueModel.IsPositive ? "checked" : "") />
+                                                <label class="form-check-label" for="@(field)_ust_@i">Üst</label>
+                                            </div>
+                                            <input type="number"
+                                                   step="0.5"
+                                                   class="form-control text-primary"
+                                                   style="width: 100px"
+                                                   name="Model[@i].Values.@(field).Value"
+                                                   value="@valueModel.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                                                   placeholder="Değer" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row mt-4">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-lg btn-success px-5 shadow">Marjları Güncelle</button>
+            </div>
+        </div>
+    </div>
+</form>
